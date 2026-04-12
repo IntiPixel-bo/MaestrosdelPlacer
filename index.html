@@ -153,45 +153,55 @@
 <script>
 /* SUPABASE */
 const SUPABASE_URL = 'https://wxstdwmoppdzojwmzvge.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind4c3Rkd21vcHBkem9qd216dmdlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1MjMyNDMsImV4cCI6MjA5MTA5OTI0M30.iipN5W35UZn2Tb3-ZnvGBtL1hBqmPi-uWjbnzIr-avs';
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...';
+
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 /* MODALS */
 function toggleModal(id) {
-  document.getElementById(id).classList.toggle('hidden');
-  document.getElementById(id).classList.toggle('flex');
+  const el = document.getElementById(id);
+  el.classList.toggle('hidden');
+  el.classList.toggle('flex');
 }
 
 /* AUTH */
 async function loginGoogle() {
-  await supabase.auth.signInWithOAuth({
+  const { error } = await sb.auth.signInWithOAuth({
     provider: 'google',
     options: { redirectTo: window.location.href }
   });
+  if (error) alert(error.message);
 }
+
 async function loginAnonimo() {
-  await supabase.auth.signInAnonymously();
-  toggleModal('auth-modal');
+  const { error } = await sb.auth.signInAnonymously();
+  if (!error) toggleModal('auth-modal');
 }
 
 /* TOPICS */
 function openTopic(topic) {
-  document.getElementById('chat-section').scrollIntoView({ behavior:'smooth' });
+  document.getElementById('chat-section')
+    .scrollIntoView({ behavior: 'smooth' });
+
   const map = {
-    psicologia: 'Quiero hablar sobre emociones, ansiedad o bienestar psicológico.',
-    sexologia: 'Tengo dudas relacionadas con salud sexual y educación sexual.',
-    placer: 'Quiero explorar temas de placer, deseo y comunicación íntima.'
+    psicologia: 'Quiero hablar sobre emociones y bienestar psicológico.',
+    sexologia: 'Tengo dudas sobre salud y educación sexual.',
+    placer: 'Quiero explorar temas de placer y comunicación íntima.'
   };
-  userInput.value = map[topic];
-  userInput.focus();
+
+  document.getElementById('user-input').value = map[topic];
 }
 
-/* FREEMIUM COUNTER */
+/* FREEMIUM COUNTER (temporal) */
 let remaining = 5;
 document.getElementById('msg-count').textContent = remaining;
+
 document.getElementById('chat-form').onsubmit = e => {
   e.preventDefault();
-  if (remaining <= 0) return alert('Has llegado al límite gratuito.');
+  if (remaining <= 0) {
+    alert('Límite gratuito alcanzado');
+    return;
+  }
   remaining--;
   document.getElementById('msg-count').textContent = remaining;
 };
