@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Maestros del Placer · Bienestar y Salud Sexual</title>
 
-  https://cdn.tailwindcss.com>
-  https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2>
-  https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    body { font-family: 'Inter', sans-serif; }
-    .glass { background: rgba(15,23,42,.9); backdrop-filter: blur(16px); }
+    body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .glass { background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(16px); }
     .chat-container { height: 500px; }
   </style>
 </head>
@@ -22,93 +28,123 @@
 <nav class="fixed top-0 w-full z-50 glass border-b border-slate-800">
   <div class="flex justify-between items-center p-4 max-w-6xl mx-auto">
     <div class="flex items-center gap-3">
-      logomp.png
-      <span class="font-bold text-xl text-purple-400">Maestros del Placer</span>
+      <img src="logomp.png" class="h-10 w-10 rounded-full border border-purple-500">
+      <span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-500">
+        Maestros del Placer
+      </span>
     </div>
-    <button onclick="toggleModal('auth-modal')" class="px-5 py-2 rounded-full bg-slate-800 border border-slate-700">
+    <button onclick="toggleModal('auth-modal')" class="bg-slate-800 hover:bg-slate-700 px-6 py-2 rounded-full text-sm font-semibold border border-slate-700">
       Entrar
     </button>
   </div>
 </nav>
 
 <!-- HERO -->
-<section class="pt-32 pb-16 text-center px-6 max-w-4xl mx-auto">
-  <h1 class="text-5xl font-bold mb-6">
-    Tu espacio seguro para hablar de <span class="text-purple-400 italic">placer y mente</span>
+<section class="max-w-4xl mx-auto text-center pt-32 pb-16 px-6">
+  <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+    Tu espacio seguro para hablar de
+    <span class="text-purple-400 italic">placer y mente</span>.
   </h1>
-  <p class="text-slate-400 mb-8">
-    Orientación profesional con IA. Sin juicios. Sin exposición.
+  <p class="text-xl text-slate-400 mb-10 max-w-2xl mx-auto">
+    Consultas anónimas con IA experta en bienestar emocional y salud sexual.
   </p>
-  #chat
+  <a href="#chat-section"
+     class="bg-gradient-to-r from-purple-600 to-pink-600 px-8 py-4 rounded-full font-bold shadow-lg">
+    Iniciar Consulta Gratis
+  </a>
 </section>
 
 <!-- TOPICS -->
 <section class="py-20 max-w-6xl mx-auto px-6">
-  <h2 class="text-3xl font-bold text-center mb-10">¿Qué podemos explorar?</h2>
-  <div class="grid md:grid-cols-3 gap-6">
+  <h2 class="text-3xl font-bold text-center mb-12">¿Qué podemos explorar hoy?</h2>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-    <div onclick="openTopic('psicologia')" class="cursor-pointer p-8 rounded-3xl bg-slate-900 border hover:border-purple-500">
-      <h3 class="text-purple-400 font-bold mb-2">Psicología</h3>
-      <p class="text-sm text-slate-400">Emociones, ansiedad, autoestima.</p>
+    <div onclick="openTopic('psicologia')"
+         class="cursor-pointer bg-slate-900/50 p-8 rounded-3xl border border-slate-800 hover:border-purple-500/40 transition">
+      <h3 class="text-xl font-bold mb-3 text-purple-400">Psicología</h3>
+      <p class="text-slate-400 text-sm">
+        Ansiedad, autoestima y gestión emocional desde un enfoque clínico.
+      </p>
     </div>
 
-    <div onclick="openTopic('sexologia')" class="cursor-pointer p-8 rounded-3xl bg-slate-900 border hover:border-pink-500">
-      <h3 class="text-pink-400 font-bold mb-2">Sexología</h3>
-      <p class="text-sm text-slate-400">Salud sexual basada en evidencia.</p>
+    <div onclick="openTopic('sexologia')"
+         class="cursor-pointer bg-slate-900/50 p-8 rounded-3xl border border-slate-800 hover:border-pink-500/40 transition">
+      <h3 class="text-xl font-bold mb-3 text-pink-400">Sexología</h3>
+      <p class="text-slate-400 text-sm">
+        Educación sexual y salud íntima basada en evidencia científica.
+      </p>
     </div>
 
-    <div onclick="openTopic('placer')" class="cursor-pointer p-8 rounded-3xl bg-slate-900 border hover:border-indigo-500">
-      <h3 class="text-indigo-400 font-bold mb-2">Placer</h3>
-      <p class="text-sm text-slate-400">Deseo, comunicación y bienestar íntimo.</p>
+    <div onclick="openTopic('placer')"
+         class="cursor-pointer bg-slate-900/50 p-8 rounded-3xl border border-slate-800 hover:border-indigo-500/40 transition">
+      <h3 class="text-xl font-bold mb-3 text-indigo-400">Placer</h3>
+      <p class="text-slate-400 text-sm">
+        Comunicación, deseo y bienestar erótico consciente.
+      </p>
     </div>
-
   </div>
 </section>
 
 <!-- CHAT -->
-<section id="chat" class="pb-24 px-6">
-  <div class="max-w-3xl mx-auto bg-slate-900 rounded-2xl border flex flex-col chat-container">
+<section id="chat-section" class="pb-24 px-6">
+  <div class="max-w-3xl mx-auto bg-slate-900 rounded-2xl border border-slate-800 flex flex-col chat-container">
 
-    <div class="p-4 bg-slate-800 flex justify-between">
-      <span class="text-xs">Consultas gratis: <b id="msg-count">5</b></span>
+    <div class="bg-slate-800 p-4 flex justify-between text-sm">
+      <span>Sesión Privada</span>
+      <span>Consultas gratis: <b id="msg-count">5</b></span>
     </div>
 
-    <div id="chat-box" class="flex-1 overflow-y-auto p-6 space-y-4"></div>
+    <div id="chat-box" class="flex-1 overflow-y-auto p-6 space-y-4 scrollbar-hide"></div>
 
-    <form id="chat-form" class="p-4 flex gap-2 border-t">
-      <input id="user-input" class="flex-1 rounded-full px-4 py-2 bg-slate-950 border" placeholder="Escribe aquí..."/>
-      <button class="bg-purple-600 px-4 rounded-full">➤</button>
+    <form id="chat-form" class="p-4 flex gap-2 border-t border-slate-700">
+      <input id="user-input"
+             class="flex-1 bg-slate-950 border border-slate-700 rounded-full px-5 py-3 text-sm"
+             placeholder="Escribe tu consulta anónima aquí...">
+      <button class="bg-purple-600 px-4 rounded-full font-bold">➤</button>
     </form>
+
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="text-center py-10 text-slate-500 text-sm">
-  © 2026 Maestros del Placer ·
-  <button onclick="toggleModal('privacy-modal')" class="underline">Política de Privacidad</button>
+<footer class="text-center py-12 border-t border-slate-900">
+  <p class="text-slate-500 text-sm">
+    © 2026 Maestros del Placer ·
+    <button onclick="toggleModal('privacy-modal')" class="underline hover:text-purple-400">
+      Política de Privacidad
+    </button>
+  </p>
 </footer>
 
-<!-- MODALS -->
-<div id="auth-modal" class="fixed inset-0 hidden z-[9999] bg-black/80 flex items-center justify-center">
-  <div class="bg-slate-900 p-8 rounded-3xl text-center w-full max-w-sm">
-    <h2 class="font-bold mb-6">Acceso Seguro</h2>
-    <button onclick="loginGoogle()" class="w-full py-3 bg-white text-black rounded-xl mb-3">
+<!-- AUTH MODAL -->
+<div id="auth-modal"
+     class="fixed inset-0 z-[9999] hidden items-center justify-center bg-black/80">
+  <div class="bg-slate-900 p-8 rounded-3xl max-w-sm w-full text-center">
+    <h2 class="text-xl font-bold mb-6">Acceso Seguro</h2>
+    <button onclick="loginGoogle()"
+            class="w-full py-3 bg-white text-slate-900 rounded-xl font-bold mb-3">
       Continuar con Google
     </button>
-    <button onclick="loginAnonimo()" class="w-full py-3 bg-slate-800 rounded-xl">
+    <button onclick="loginAnonimo()"
+            class="w-full py-3 bg-slate-800 rounded-xl border border-slate-700">
       Acceso Anónimo
     </button>
-    <button onclick="toggleModal('auth-modal')" class="mt-4 text-xs">Cerrar</button>
+    <button onclick="toggleModal('auth-modal')" class="mt-5 text-xs text-slate-400">
+      Cerrar
+    </button>
   </div>
 </div>
 
-<div id="privacy-modal" class="fixed inset-0 hidden z-[99999] bg-black/90 flex items-center justify-center p-6">
+<!-- PRIVACY MODAL -->
+<div id="privacy-modal"
+     class="fixed inset-0 z-[10000] hidden items-center justify-center bg-black/90 p-6">
   <div class="bg-slate-900 p-8 rounded-3xl max-w-2xl overflow-y-auto">
-    <h2 class="text-purple-400 font-bold mb-4">Política de Privacidad</h2>
-    <p class="text-sm text-slate-400">
-      Este servicio es anónimo. No sustituye atención profesional.
+    <h2 class="text-2xl font-bold mb-4 text-purple-400">Política de Privacidad</h2>
+    <p class="text-sm text-slate-400 leading-relaxed">
+      Este asistente es solo orientativo, no reemplaza atención profesional.
     </p>
-    <button onclick="toggleModal('privacy-modal')" class="mt-6 bg-purple-600 px-6 py-2 rounded-full">
+    <button onclick="toggleModal('privacy-modal')"
+            class="mt-6 bg-purple-600 px-6 py-3 rounded-full font-bold">
       Entendido
     </button>
   </div>
@@ -123,13 +159,14 @@ const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 /* MODALS */
 function toggleModal(id) {
   document.getElementById(id).classList.toggle('hidden');
+  document.getElementById(id).classList.toggle('flex');
 }
 
 /* AUTH */
 async function loginGoogle() {
   await supabase.auth.signInWithOAuth({
     provider: 'google',
-    options: { redirectTo: location.href }
+    options: { redirectTo: window.location.href }
   });
 }
 async function loginAnonimo() {
@@ -139,25 +176,24 @@ async function loginAnonimo() {
 
 /* TOPICS */
 function openTopic(topic) {
-  document.getElementById('chat').scrollIntoView({behavior:'smooth'});
+  document.getElementById('chat-section').scrollIntoView({ behavior:'smooth' });
   const map = {
-    psicologia: 'Quiero hablar sobre bienestar emocional.',
-    sexologia: 'Tengo dudas sobre salud sexual.',
-    placer: 'Quiero explorar temas de placer y deseo.'
+    psicologia: 'Quiero hablar sobre emociones, ansiedad o bienestar psicológico.',
+    sexologia: 'Tengo dudas relacionadas con salud sexual y educación sexual.',
+    placer: 'Quiero explorar temas de placer, deseo y comunicación íntima.'
   };
   userInput.value = map[topic];
+  userInput.focus();
 }
 
-/* CHAT LIMIT */
+/* FREEMIUM COUNTER */
 let remaining = 5;
-const counter = document.getElementById('msg-count');
-counter.textContent = remaining;
-
-document.getElementById('chat-form').onsubmit = async e => {
+document.getElementById('msg-count').textContent = remaining;
+document.getElementById('chat-form').onsubmit = e => {
   e.preventDefault();
-  if (remaining <= 0) return alert('Límite alcanzado');
+  if (remaining <= 0) return alert('Has llegado al límite gratuito.');
   remaining--;
-  counter.textContent = remaining;
+  document.getElementById('msg-count').textContent = remaining;
 };
 </script>
 
